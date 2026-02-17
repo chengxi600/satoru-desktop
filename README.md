@@ -1,7 +1,19 @@
-# Tauri + Vanilla TS
+# Satoru Desktop App
 
-This template should help get you started developing with Tauri in vanilla HTML, CSS and Typescript.
+**Satoru Desktop App** is a macOS desktop application inspired by [SAT0RU](https://github.com/reinesana/SAT0RU) by reinesana. The app uses your webcam to detect hand gestures and trigger unique visual effects.
 
-## Recommended IDE Setup
+## Features
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+* **Gesture-based visual effects**:
+
+  * **Left hand index pointing up** – *Cursed Technique Reversal: Red*
+  * **Right hand index pointing up** – *Cursed Technique Lapse: Red*
+  * **One hand index + middle intertwined** – *Infinite Void*
+  * **One hand thumb + index pinched** – *Hollow Purple*
+  * **Triangle with both hands** – *Malevolent Shrine*
+
+## Setup
+
+1. Download the latest release for macOS.
+2. Launch the app and **allow webcam access** when prompted.
+3. Watch as the app reacts to your gestures in real time.
