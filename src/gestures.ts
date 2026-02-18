@@ -1,7 +1,7 @@
 import { HandLandmarkerResult } from "@mediapipe/tasks-vision";
-import { ShapeName } from "./data";
+import { TechniqueName } from "./techniques/base";
 
-export function process_landmarks_shape(results: HandLandmarkerResult): ShapeName {
+export function process_landmarks_shape(results: HandLandmarkerResult): TechniqueName {
   if (is_shrine(results)) {
     return "Malevolent Shrine";
   } else if(is_void(results)){

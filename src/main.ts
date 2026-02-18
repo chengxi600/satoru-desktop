@@ -2,7 +2,7 @@ import { HAND_CONNECTIONS } from "@mediapipe/hands";
 import { FilesetResolver, HandLandmarker, HandLandmarkerResult } from "@mediapipe/tasks-vision";
 import { drawCustomConnectors, drawCustomLandmarks } from "./util";
 import { process_landmarks_shape } from "./gestures";
-import { setShape } from "./shapeStore";
+import { setTechnique } from "./technique_manager";
 
 if (typeof window !== "undefined") {
   window.addEventListener("load", () => {
@@ -70,7 +70,7 @@ if (typeof window !== "undefined") {
           });
           drawCustomLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2, radius: 4 });
         }
-        setShape(process_landmarks_shape(results));
+        setTechnique(process_landmarks_shape(results));
       }
       canvasCtx.restore();
 
