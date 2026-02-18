@@ -1,6 +1,13 @@
 import * as THREE from "three";
 
-export type TechniqueName = "Malevolent Shrine" | "Infinite Void" | "Purple" | "Red" | "Blue" | "Neutral";
+export enum TechniqueName {
+  MalevolentShrine = "Malevolent Shrine",
+  InfiniteVoid = "Infinite Void",
+  Purple = "Hollow Purple",
+  Red = "Cursed Technique: Red",
+  Blue = "Cursed Techinque: Blue",
+  Neutral = "Cursed Technique",
+}
 
 export const COUNT = 20000;
 
@@ -20,7 +27,7 @@ export interface Technique {
 }
 
 export const neutral: Technique = {
-  name: "Neutral",
+  name: TechniqueName.Neutral,
   audio: new Audio(),
   geometry: {
     verticies: new Float32Array(COUNT * 3),

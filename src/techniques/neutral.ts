@@ -1,4 +1,4 @@
-import { COUNT, Technique, createShape, createTechnique } from "./base";
+import { COUNT, Technique, TechniqueName, createShape, createTechnique } from "./base";
 
 function getNeutral(vertexCount: number): Technique {
   const neutral = createShape(vertexCount);
@@ -35,7 +35,7 @@ function getNeutral(vertexCount: number): Technique {
   neutral.bloomPassStrength = 1.0;
   neutral.rotationDelta.set(0, 0.005, 0);
 
-  return createTechnique("Neutral", neutral, "/audio/neutral.mp3");
+  return createTechnique(TechniqueName.Neutral, neutral, "/audio/neutral.mp3");
 }
 
 export const neutral = getNeutral(COUNT);

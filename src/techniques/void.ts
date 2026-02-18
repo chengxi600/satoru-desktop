@@ -1,4 +1,4 @@
-import { COUNT, Technique, createShape, createTechnique } from "./base";
+import { COUNT, Technique, TechniqueName, createShape, createTechnique } from "./base";
 
 function getVoid(vertexCount: number): Technique {
   const infiniteVoid = createShape(vertexCount);
@@ -57,7 +57,7 @@ function getVoid(vertexCount: number): Technique {
   infiniteVoid.bloomPassStrength = 2.0;
   infiniteVoid.rotationDelta.set(0, 0.005, 0);
 
-  return createTechnique("Infinite Void", infiniteVoid, "/audio/void.mp3");
+  return createTechnique(TechniqueName.InfiniteVoid, infiniteVoid, "/audio/void.mp3");
 }
 
 export const voidTechnique = getVoid(COUNT);

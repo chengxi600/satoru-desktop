@@ -3,17 +3,17 @@ import { TechniqueName } from "./techniques/base";
 
 export function process_landmarks_shape(results: HandLandmarkerResult): TechniqueName {
   if (is_shrine(results)) {
-    return "Malevolent Shrine";
+    return TechniqueName.MalevolentShrine;
   } else if(is_void(results)){
-    return "Infinite Void";
+    return TechniqueName.InfiniteVoid;
   } else if (is_red(results)) {
-    return "Red";
+    return TechniqueName.Red;
   }else if (is_purple(results)) {
-    return "Purple";
+    return TechniqueName.Purple;
   } else if (is_blue(results)) {
-    return "Blue";
+    return TechniqueName.Blue;
   } else {
-    return "Neutral"
+    return TechniqueName.Neutral
   }
 }
 

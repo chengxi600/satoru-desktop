@@ -1,4 +1,4 @@
-import { COUNT, Technique, createShape, createTechnique } from "./base";
+import { COUNT, Technique, TechniqueName, createShape, createTechnique } from "./base";
 
 function getPurple(vertexCount: number): Technique {
   const purple = createShape(vertexCount);
@@ -39,7 +39,7 @@ function getPurple(vertexCount: number): Technique {
   purple.bloomPassStrength = 4.0;
   purple.rotationDelta.set(0, 0.05, 0.2);
 
-  return createTechnique("Purple", purple, "/audio/purple.mp3");
+  return createTechnique(TechniqueName.Purple, purple, "/audio/purple.mp3");
 }
 
 export const purple = getPurple(COUNT);

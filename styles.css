@@ -23,8 +23,37 @@ body {
 }
 
 h1 {
-  text-align: center;
-  color: white;
+  position: absolute;
+  top: 40px;
+  /* push it down so it's not cut off */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  line-height: 1.2;
+  /* helps vertical spacing */
+  margin: 0;
+  letter-spacing: 10px;
+  font-weight: 900;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to bottom, #fff, #888);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 10;
+}
+
+#technique-name {
+  position: absolute;
+  top: 100px;
+  /* push below the h1 */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  color: #00ffff;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  z-index: 10;
 }
 
 .invisible {

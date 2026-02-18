@@ -73,6 +73,11 @@ if (typeof window !== "undefined") {
       // Update current technique
       let technique = getCurrentTechnique();
 
+      // Update technique title
+      const title = document.getElementById("technique-name") as HTMLTitleElement;
+      title.innerHTML = technique.name;
+      
+
       // Shake Intensity
       const shakeIntensity = technique.geometry.shakeIntensity;
 

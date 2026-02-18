@@ -51,22 +51,22 @@ export function setTechnique(name: TechniqueName) {
   fadeAudio(currentTechnique.audio, 0, 500);
 
   switch (name) {
-    case "Malevolent Shrine":
+    case TechniqueName.MalevolentShrine:
       currentTechnique = shrine;
       break;
-    case "Infinite Void":
+    case TechniqueName.InfiniteVoid:
       currentTechnique = voidTechnique;
       break;
-    case "Purple":
+    case TechniqueName.Purple:
       currentTechnique = purple;
       break;
-    case "Red":
+    case TechniqueName.Red:
       currentTechnique = red;
       break;
-    case "Blue":
+    case TechniqueName.Blue:
       currentTechnique = blue;
       break;
-    case "Neutral":
+    case TechniqueName.Neutral:
       currentTechnique = neutral;
       break;
   }
