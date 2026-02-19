@@ -1,6 +1,6 @@
 # Satoru Desktop App
 
-**Satoru Desktop App** is a macOS desktop application inspired by [SAT0RU](https://github.com/reinesana/SAT0RU) by reinesana. The app uses your webcam to detect hand gestures and trigger unique visual effects.
+**Satoru Desktop App** is a macOS desktop application inspired by [SAT0RU](https://github.com/reinesana/SAT0RU) by reinesana. The app uses your webcam to detect hand gestures and trigger unique visual effects. Support visuals from the show Jujutsu Kaisen and Chainsaw Man.
 
 ## Features
 
@@ -11,6 +11,8 @@
   * **One hand index + middle intertwined** – *Infinite Void*
   * **One hand thumb + index pinched** – *Hollow Purple*
   * **Triangle with both hands** – *Malevolent Shrine*
+  * **Right hand Kon gesture** - *Fox Devil: Kon*
+  * **Right hand two fingers pulling pin from beck** = *Reze: Bomb Devil*
 
 ## Setup
 

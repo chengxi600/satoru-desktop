@@ -1,4 +1,5 @@
-import { COUNT, Technique, TechniqueName, createShape, createTechnique } from "./base";
+import { HandLandmarkerResult } from "@mediapipe/tasks-vision";
+import { Anime, COUNT, Technique, TechniqueName, createShape, createTechnique } from "./base";
 
 function getVoid(vertexCount: number): Technique {
   const infiniteVoid = createShape(vertexCount);
@@ -57,7 +58,28 @@ function getVoid(vertexCount: number): Technique {
   infiniteVoid.bloomPassStrength = 2.0;
   infiniteVoid.rotationDelta.set(0, 0.005, 0);
 
-  return createTechnique(TechniqueName.InfiniteVoid, infiniteVoid, "/audio/void.mp3");
+  return createTechnique(TechniqueName.InfiniteVoid, Anime.JJK, infiniteVoid, "/audio/void.mp3");
+}
+
+export function is_void(results: HandLandmarkerResult): boolean {
+  // only one hand
+  if (results.handedness.length !== 1) {
+    return false;
+  }
+
+  const landmarks = results.landmarks[0];
+
+  const fingertipIndices = [16, 20]; // middle, ring, pinky
+  const thumb = 4;
+  const indexTip = 8;
+  const middleTip = 12;
+
+  const isAbove = (i: number, j: number) => landmarks[i].y < landmarks[j].y;
+
+  const indexAboveAllFingers = [thumb, ...fingertipIndices].every(i => isAbove(indexTip, i));
+  const middleAboveAllFingers = [thumb, ...fingertipIndices].every(i => isAbove(middleTip, i));
+
+  return indexAboveAllFingers && middleAboveAllFingers;
 }
 
 export const voidTechnique = getVoid(COUNT);

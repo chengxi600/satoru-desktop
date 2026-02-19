@@ -1,4 +1,5 @@
-import { COUNT, Technique, TechniqueName, createShape, createTechnique } from "./base";
+import { HandLandmarkerResult } from "@mediapipe/tasks-vision";
+import { Anime, COUNT, Technique, TechniqueName, createShape, createTechnique } from "./base";
 
 function getShrine(vertexCount: number): Technique {
   const shrine = createShape(vertexCount);
@@ -76,6 +77,41 @@ function getShrine(vertexCount: number): Technique {
   shrine.bloomPassStrength = 3.5;     
   shrine.rotationDelta.set(0, 0, 0);
 
-  return createTechnique(TechniqueName.MalevolentShrine, shrine, "/audio/shrine.mp3");
+  return createTechnique(TechniqueName.MalevolentShrine, Anime.JJK, shrine, "/audio/shrine.mp3");
 }
+
+export function is_shrine(results: HandLandmarkerResult): boolean {
+  // two hands
+  if (results.handedness.length < 2) {
+    return false;
+  }
+
+  let shrine = true;
+
+  for (let i = 0; i < results.handedness.length; i++) {
+    const landmarks = results.landmarks[i];
+    const handedness = results.handedness[i][0].categoryName;
+
+    const fingertipIndices = [8, 12, 16, 20]; // index, middle, ring, pinky
+    const thumb = 4;
+    const wrist = 0;
+
+    const isAbove = (i: number, j: number) => landmarks[i].y < landmarks[j].y;
+    const isRightOf = (i: number, j: number) => landmarks[i].x < landmarks[j].x;
+    const isLeftOf = (i: number, j: number) => landmarks[i].x > landmarks[j].x;
+
+    const horizontalCheck = handedness === "Right" ? isRightOf : isLeftOf;
+
+    const allFingersAboveWrist = fingertipIndices.every(i => isAbove(i, wrist));
+    const allFingersOnCorrectSide = fingertipIndices.every(i => horizontalCheck(i, wrist));
+    const thumbCorrectSide = horizontalCheck(thumb, wrist);
+
+    shrine = shrine &&
+         allFingersAboveWrist &&
+         allFingersOnCorrectSide &&
+         thumbCorrectSide;
+  }
+  return shrine;
+}
+
 export const shrine = getShrine(COUNT);

@@ -1,7 +1,11 @@
+/**
+ * Enables webcam, initializes rendering loop to draw hand landmarks 
+ * and connectors onto webcam canvas. Media pipe hand detection on loop. 
+ * 
+ */
 import { HAND_CONNECTIONS } from "@mediapipe/hands";
 import { FilesetResolver, HandLandmarker, HandLandmarkerResult } from "@mediapipe/tasks-vision";
-import { drawCustomConnectors, drawCustomLandmarks } from "./util";
-import { process_landmarks_shape } from "./gestures";
+import { drawCustomConnectors, drawCustomLandmarks, process_landmarks_shape } from "./utils";
 import { setTechnique } from "./technique_manager";
 
 if (typeof window !== "undefined") {

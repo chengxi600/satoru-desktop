@@ -1,4 +1,5 @@
-import { COUNT, createShape, createTechnique, Technique, TechniqueName } from "./base";
+import { HandLandmarkerResult } from "@mediapipe/tasks-vision";
+import { Anime, COUNT, createShape, createTechnique, Technique, TechniqueName } from "./base";
 
 function getBlue(vertexCount: number): Technique {
   const blue = createShape(vertexCount);
@@ -46,7 +47,29 @@ function getBlue(vertexCount: number): Technique {
   blue.bloomPassStrength = 1.5;
   blue.rotationDelta.set(0, 0, 0.1);
 
-  return createTechnique(TechniqueName.Blue, blue, "/audio/blue.mp3");
+  return createTechnique(TechniqueName.Blue, Anime.JJK, blue, "/audio/blue.mp3");
+}
+
+export function is_blue(results: HandLandmarkerResult): boolean {
+  // only one hand
+  if (results.handedness.length !== 1) {
+    return false;
+  }
+
+  const landmarks = results.landmarks[0];
+
+  const fingertipIndices = [12, 16, 20]; // middle, ring, pinky
+  const thumb = 4;
+  const indexTip = 8;
+
+  const isAbove = (i: number, j: number) => landmarks[i].y < landmarks[j].y;
+  const isLeftOf = (i: number, j: number) => landmarks[i].x > landmarks[j].x;
+
+  const indexAboveAllFingers = [thumb, ...fingertipIndices].every(i => isAbove(indexTip, i));
+
+  const allFingersRightOfIndex = [thumb, ...fingertipIndices].every(i => isLeftOf(i, indexTip));
+
+  return indexAboveAllFingers && allFingersRightOfIndex;
 }
 
 export const blue = getBlue(COUNT);

@@ -1,3 +1,8 @@
+/**
+ * Runs the Three.js animation loop. Initializes camera, scene, and renders 
+ * BufferGeometry for each technique. Uses composer to add post processing effects.
+ * 
+ */
 import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
@@ -67,11 +72,29 @@ if (typeof window !== "undefined") {
 
     // Points
     const particles = new THREE.Points(geometry, material);
+    // particles.scale.set(40, 40, 40);
     scene.add(particles);
 
+    // track prev technique
+    let prevTechnique = getCurrentTechnique();
+
+    /**
+     * Animation Loop
+     */
     function animate() {
       // Update current technique
       let technique = getCurrentTechnique();
+      
+
+      // Set initial rotation for a new technique
+      if (prevTechnique !== technique) {
+        particles.rotation.set(0, 0, 0);
+      }
+      prevTechnique = technique;
+
+      // Update header
+      const header = document.getElementById("header") as HTMLHeadingElement;
+      header.innerHTML = technique.anime;
 
       // Update technique title
       const title = document.getElementById("technique-name") as HTMLTitleElement;
@@ -87,9 +110,7 @@ if (typeof window !== "undefined") {
         renderer.domElement.style.transform = 'translate(0,0)';
       }
 
-      /**
-       * Move current geometry towards target geometry for smooth transition
-       */
+      // Move current geometry towards target geometry for smooth transition
       const pos = particles.geometry.attributes.position.array;
       const col = particles.geometry.attributes.color.array;
       const siz = particles.geometry.attributes.size.array;
@@ -114,11 +135,6 @@ if (typeof window !== "undefined") {
       particles.rotation.x += technique.geometry.rotationDelta.x;
       particles.rotation.y += technique.geometry.rotationDelta.y;
       particles.rotation.z += technique.geometry.rotationDelta.z;
-
-      // Set rotation for shrine
-      if (technique.name === "Malevolent Shrine") {
-        particles.rotation.set(0, 0, 0);
-      }
 
       composer.render();
     }

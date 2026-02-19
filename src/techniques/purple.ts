@@ -1,4 +1,5 @@
-import { COUNT, Technique, TechniqueName, createShape, createTechnique } from "./base";
+import { HandLandmarkerResult } from "@mediapipe/tasks-vision";
+import { Anime, COUNT, Technique, TechniqueName, createShape, createTechnique } from "./base";
 
 function getPurple(vertexCount: number): Technique {
   const purple = createShape(vertexCount);
@@ -39,7 +40,36 @@ function getPurple(vertexCount: number): Technique {
   purple.bloomPassStrength = 4.0;
   purple.rotationDelta.set(0, 0.05, 0.2);
 
-  return createTechnique(TechniqueName.Purple, purple, "/audio/purple.mp3");
+  return createTechnique(TechniqueName.Purple, Anime.JJK, purple, "/audio/purple.mp3");
+}
+
+export function is_purple(results: HandLandmarkerResult): boolean {
+  if (results.handedness.length !== 1) return false;
+
+  const landmarks = results.landmarks[0];
+  const thumbTip = landmarks[4];
+  const indexTip = landmarks[8];
+
+  // Distance between thumb and index
+  const dx = thumbTip.x - indexTip.x;
+  const dy = thumbTip.y - indexTip.y;
+  const dz = thumbTip.z - indexTip.z;
+  const distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+
+  // Optional: check if middle, ring, pinky are somewhat extended
+  const middleTip = landmarks[12];
+  const ringTip = landmarks[16];
+  const pinkyTip = landmarks[20];
+
+  const fingersExtended = 
+    middleTip.y < landmarks[0].y && // above wrist
+    ringTip.y < landmarks[0].y &&
+    pinkyTip.y < landmarks[0].y;
+
+  // Threshold for pinch (tune between 0.03-0.08 depending on normalized coords)
+  const PINCH_THRESHOLD = 0.05;
+
+  return distance < PINCH_THRESHOLD && fingersExtended;
 }
 
 export const purple = getPurple(COUNT);

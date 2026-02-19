@@ -1,4 +1,4 @@
-import { COUNT, Technique, TechniqueName, createShape, createTechnique } from "./base";
+import { Anime, COUNT, Technique, TechniqueName, createShape, createTechnique } from "./base";
 
 function getNeutral(vertexCount: number): Technique {
   const neutral = createShape(vertexCount);
@@ -9,7 +9,7 @@ function getNeutral(vertexCount: number): Technique {
     let s = 0;
 
     if (i < vertexCount * 0.05) {
-      const radius = 15 + Math.random() * 20;
+      const radius = 50 + Math.random() * 20;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.random() * Math.PI;
 
@@ -35,7 +35,7 @@ function getNeutral(vertexCount: number): Technique {
   neutral.bloomPassStrength = 1.0;
   neutral.rotationDelta.set(0, 0.005, 0);
 
-  return createTechnique(TechniqueName.Neutral, neutral, "/audio/neutral.mp3");
+  return createTechnique(TechniqueName.Neutral, Anime.JJK, neutral, "/audio/neutral.mp3");
 }
 
 export const neutral = getNeutral(COUNT);

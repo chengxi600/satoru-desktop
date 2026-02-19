@@ -6,7 +6,14 @@ export enum TechniqueName {
   Purple = "Hollow Purple",
   Red = "Cursed Technique: Red",
   Blue = "Cursed Techinque: Blue",
+  Kon = "Fox Devil: Kon",
+  Reze = "Reze: Bomb Devil",
   Neutral = "Cursed Technique",
+}
+
+export enum Anime {
+  CSM = "Chainsaw Man",
+  JJK = "呪術廻戦"
 }
 
 export const COUNT = 20000;
@@ -22,12 +29,14 @@ export interface PointCloudShape {
 
 export interface Technique {
   name: TechniqueName;
+  anime: Anime;
   geometry: PointCloudShape;
   audio: HTMLAudioElement;
 }
 
 export const neutral: Technique = {
   name: TechniqueName.Neutral,
+  anime: Anime.JJK,
   audio: new Audio(),
   geometry: {
     verticies: new Float32Array(COUNT * 3),
@@ -52,6 +61,7 @@ export function createShape(vertexCount: number): PointCloudShape {
 
 export function createTechnique(
   name: TechniqueName,
+  anime: Anime,
   geometry: PointCloudShape,
   audioSrc?: string
 ): Technique {
@@ -60,6 +70,7 @@ export function createTechnique(
 
   return {
     name,
+    anime,
     geometry,
     audio
   };

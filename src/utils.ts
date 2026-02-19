@@ -1,3 +1,13 @@
+import { HandLandmarkerResult } from "@mediapipe/tasks-vision";
+import { TechniqueName } from "./techniques/base";
+import { is_blue } from "./techniques/blue";
+import { is_purple } from "./techniques/purple";
+import { is_red } from "./techniques/red";
+import { is_shrine } from "./techniques/shrine";
+import { is_void } from "./techniques/void";
+import { is_kon } from "./techniques/kon";
+import { is_reze } from "./techniques/reze";
+
 // Custom drawing functions compatible with tasks-vision
 export function drawCustomConnectors(ctx: CanvasRenderingContext2D, landmarks: any[], connections: any[], style: {color: string, lineWidth: number}) {
   ctx.strokeStyle = style.color;
@@ -32,5 +42,25 @@ export function drawCustomLandmarks(ctx: CanvasRenderingContext2D, landmarks: an
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, 2 * Math.PI);
       ctx.fill();
+  }
+}
+
+export function process_landmarks_shape(results: HandLandmarkerResult): TechniqueName {
+  if (is_shrine(results)) {
+    return TechniqueName.MalevolentShrine;
+  } else if (is_void(results)) {
+    return TechniqueName.InfiniteVoid;
+  } else if (is_red(results)) {
+    return TechniqueName.Red;
+  } else if (is_purple(results)) {
+    return TechniqueName.Purple;
+  } else if (is_blue(results)) {
+    return TechniqueName.Blue;
+  } else if (is_kon(results)) {
+    return TechniqueName.Kon;
+  } else if (is_reze(results)) {
+    return TechniqueName.Reze;
+  } else {
+    return TechniqueName.Neutral
   }
 }

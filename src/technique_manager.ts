@@ -1,13 +1,19 @@
+/**
+ * Manages current technique state and technique switching logic.
+ * Also handles audio for each technique. 
+ * 
+ */
 import { Technique, TechniqueName } from "./techniques/base";
 import { blue } from "./techniques/blue";
+import { kon } from "./techniques/kon";
 import { neutral } from "./techniques/neutral";
 import { purple } from "./techniques/purple";
 import { red } from "./techniques/red";
+import { reze } from "./techniques/reze";
 import { shrine } from "./techniques/shrine";
 import { voidTechnique } from "./techniques/void";
 
 let currentTechnique: Technique = neutral;
-
 
 export function getCurrentTechnique() {
   return currentTechnique;
@@ -68,6 +74,12 @@ export function setTechnique(name: TechniqueName) {
       break;
     case TechniqueName.Neutral:
       currentTechnique = neutral;
+      break;
+    case TechniqueName.Reze:
+      currentTechnique = reze;
+      break;
+    case TechniqueName.Kon:
+      currentTechnique = kon;
       break;
   }
 
